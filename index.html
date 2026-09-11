@@ -2,14 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Iso RPG</title>
   <style>
-    html, body { margin: 0; padding: 0; overflow: hidden; background: #111; }
+    html, body {
+      margin: 0; padding: 0; overflow: hidden;
+      background: #111; touch-action: none;
+      -webkit-user-select: none; user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
     canvas { display: block; }
+
+    #ui {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      font-family: system-ui, sans-serif;
+      color: #fff;
+    }
+
+    /* --- Joystick (left) --- */
+    #joystick {
+      position: absolute;
+      left: 30px; bottom: 30px;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.10);
+      border: 2px solid rgba(255,255,255,0.25);
+      pointer-events: auto;
+      touch-action: none;
+    }
+    #knob {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 60px; height: 60px;
+      margin-left: -30px; margin-top: -30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      transition: transform 0.05s linear;
+    }
+
+    /* --- Action button (right) --- */
+    #action {
+      position: absolute;
+      right: 40px; bottom: 50px;
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: rgba(80,140,255,0.5);
+      border: 2px solid rgba(255,255,255,0.4);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      pointer-events: auto;
+      touch-action: none;
+    }
   </style>
 </head>
 <body>
+  <div id="ui">
+    <div id="joystick"><div id="knob"></div></div>
+    <button id="action">ACT</button>
+  </div>
+
   <script type="importmap">
   {
     "imports": {
